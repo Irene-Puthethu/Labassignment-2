@@ -69,6 +69,9 @@ class LinkedList{
            //Create a node
           Node * temp = new Node; 
           temp -> value = data;
+          
+          temp->next=current->next;
+          current->next=temp;
       }
 //2.delete() - Deletes the element at the end of the list. 
      //Deletion of the last element
@@ -87,8 +90,38 @@ class LinkedList{
         //delete temp 
         delete temp;
           
+        
       }
-      
+//3.deleteAt()
+     void deleteAt(int pos)
+    {
+        // Reach the place before the pos
+        Node * current = head;
+        int i =1;
+        while(i < pos-1){
+            i++;
+             current = current->next;
+        } 
+        //Change the pointer to point to the next one 
+        Node * temp = current->next;
+        current->next = temp->next;
+        // delete temp 
+        delete temp;
+    }
+    //4.count the number of nodes in the linked list
+    int countItems(){
+        // Initialze count
+        int count = 0;
+        // Initialise current
+        Node * current = head;
+        while(current != NULL){
+           count++;
+           current = current->next;
+        }
+        cout << count << endl;
+        return count;
+    }
+    
 //5.display() - Displays all the elements in the linked list. Format should be followed as “1 -> 2 -> 3 -> 4 -> NULL” for a linked list hol
  //Display
       void display(){
@@ -103,11 +136,18 @@ class LinkedList{
 //main function
 int main(){
   LinkedList l1;
-  l1.insert(1);
-  l1.insert(2);
-  l1.insert(3);
-  l1.display();
-  l1.delet();
-  l1.display();
+    l1.insert(2);
+    l1.insert(1);
+    l1.insert(3);
+    l1.insert(4);
+    l1.countItems();
+    l1.display();
+    l1.insertAt(1,3);
+    l1.countItems();
+    l1.display();
+    l1.delet();
+    l1.deleteAt(2);
+    l1.countItems();
+    l1.display();
      return 0;
 }
